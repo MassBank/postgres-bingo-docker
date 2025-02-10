@@ -13,7 +13,7 @@ To use this Docker image, you can pull it from the Docker registry or build it l
 ### Pull from Docker Registry
 
 ```sh
-docker pull quay.io/massbank/postgres:latest
+docker pull quay.io/massbank/postgres-bingo:latest
 ```
 
 ### Build Locally
@@ -23,7 +23,7 @@ Clone this repository and build the Docker image:
 ```sh
 git clone https://github.com/MassBank/postgres-bingo.git
 cd postgres-bingo
-docker build -t massbank/postgres:latest .
+docker build -t postgres-bingo:latest .
 ```
 
 ## Running the Container
@@ -31,7 +31,7 @@ docker build -t massbank/postgres:latest .
 To run a container using this image:
 
 ```sh
-$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/massbank/postgres
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/massbank/postgres-bingo
 ```
 
 ## Initialization Scripts
