@@ -1,6 +1,6 @@
 # Postgres Docker Image with Bingo Chemistry search engine
 
-This repository contains a Docker image for a PostgreSQL database extended with the [Bingo chemistry cartridge](https://github.com/epam/indigo).
+This repository contains a Docker image for a PostgreSQL database extended with the [Bingo chemistry cartridge](https://github.com/epam/indigo) based on [bitnami/postgresql](https://github.com/bitnami/containers/blob/main/bitnami/postgresql/README.md).
 
 ## Overview
 
