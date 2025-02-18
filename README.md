@@ -34,6 +34,12 @@ To run a container using this image:
 $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/massbank/postgres-bingo
 ```
 
+The bingo cartridge needs administrator rights during the initialisation. If you set a POSTGRESQL_USERNAME environment variable the system will set no password for the `postgres` admin user. Thus, you must also set POSTGRESQL_POSTGRES_PASSWORD or the bingo initialisation will fail.
+
+```sh
+docker run --name some-postgres -e POSTGRESQL_DATABASE=mydatabase -e POSTGRESQL_USERNAME=mydbuser -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRESQL_POSTGRES_PASSWORD=mysecretadminpassword -d postgres-bingo:latest
+```
+
 ## Initialization Scripts
 
 This image supports initialization scripts located in the `/docker-entrypoint-initdb.d/` directory like normal postgres images. The bing specific init scripts are integrated in the image and located in `/opt/bingo-postgres/init-scripts/`. The ENTRYPOINT script is modified to automatically execute this script.

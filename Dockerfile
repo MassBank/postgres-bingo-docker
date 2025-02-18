@@ -14,5 +14,5 @@ FROM bitnami/postgresql:15 as base
 USER root
 COPY --from=builder /opt/bingo-postgres/lib /opt/bingo-postgres/lib
 COPY --from=builder /opt/bingo-postgres/bingo_install.sql /opt/bingo-postgres/init-scripts/000-bingo_install.sql
-RUN sed -i '/# Allow running custom initialization scripts/a POSTGRESQL_INITSCRIPTS_DIR=\/opt\/bingo-postgres\/init-scripts postgresql_custom_init_scripts' /opt/bitnami/scripts/postgresql/setup.sh
+RUN sed -i '/# Allow running custom initialization scripts/a POSTGRESQL_INITSCRIPTS_USERNAME=postgres POSTGRESQL_INITSCRIPTS_DIR=\/opt\/bingo-postgres\/init-scripts postgresql_custom_init_scripts' /opt/bitnami/scripts/postgresql/setup.sh
 USER 1001
