@@ -12,5 +12,5 @@ RUN /bin/sh bingo-pg-install.sh -libdir /opt/bingo-postgres/lib -y
 
 FROM busybox as base
 COPY --from=builder /opt/bingo-postgres/lib /bingo-postgres/lib
-COPY --from=builder /opt/bingo-postgres/bingo_install.sql /bingo-postgres/init-scripts/000-bingo_install.sql
+COPY --from=builder /opt/bingo-postgres/bingo_install.sql /bingo-postgres/init-scripts/000_bingo_install.sql
 RUN chown -R 1001:1001 /bingo-postgres
