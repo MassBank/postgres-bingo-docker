@@ -49,7 +49,7 @@ jobs:
           cache-from: type=registry,ref=quay.io/massbank/postgres-bingo:latest
           cache-to: type=inline
 
-      - name: Build and push postgres-bingo image
+      - name: Build and push postgres-bingo-init image
         uses: docker/build-push-action@v6
         with:
           context: .
