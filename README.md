@@ -1,6 +1,6 @@
 # Postgres Docker Image with Bingo Chemistry search engine
 
-This repository contains a Docker image for a PostgreSQL database extended with the [Bingo chemistry cartridge](https://github.com/epam/indigo) based on [bitnami/postgresql](https://github.com/bitnami/containers/blob/main/bitnami/postgresql/README.md).
+This repository contains a Docker image for a PostgreSQL database extended with the [Bingo chemistry cartridge](https://github.com/epam/indigo).
 
 ## Overview
 
@@ -32,12 +32,6 @@ To run a container using this image:
 
 ```sh
 $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.io/massbank/postgres-bingo
-```
-
-The bingo cartridge needs administrator rights during the initialisation. If you set a POSTGRESQL_USERNAME environment variable the system will set no password for the `postgres` admin user. Thus, you must also set POSTGRESQL_POSTGRES_PASSWORD or the bingo initialisation will fail.
-
-```sh
-docker run --name some-postgres -e POSTGRESQL_DATABASE=mydatabase -e POSTGRESQL_USERNAME=mydbuser -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRESQL_POSTGRES_PASSWORD=mysecretadminpassword -d postgres-bingo:latest
 ```
 
 ## Initialization Scripts

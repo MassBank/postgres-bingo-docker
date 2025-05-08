@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim as builder
+FROM postgres:15 as builder
 
 # install tools (wget, unzip)
 RUN apt-get update \
@@ -9,6 +9,7 @@ RUN mkdir -p /opt/bingo-postgres
 RUN unzip -p bingo-postgres-15-linux-x86_64.zip | tar -xzf- -C /opt/bingo-postgres --strip-components=1
 WORKDIR /opt/bingo-postgres
 RUN /bin/sh bingo-pg-install.sh -libdir /opt/bingo-postgres/lib -y
+
 
 FROM busybox as base
 COPY --from=builder /opt/bingo-postgres/lib /bingo-postgres/lib
