@@ -10,9 +10,8 @@ RUN unzip -p bingo-postgres-15-linux-x86_64.zip | tar -xzf- -C /opt/bingo-postgr
 WORKDIR /opt/bingo-postgres
 RUN /bin/sh bingo-pg-install.sh -libdir /opt/bingo-postgres/lib -y
 
-FROM bitnami/postgresql:15 as base
+FROM postgres:15 as base
 USER root
 COPY --from=builder /opt/bingo-postgres/lib /opt/bingo-postgres/lib
 COPY --from=builder /opt/bingo-postgres/bingo_install.sql /opt/bingo-postgres/init-scripts/000-bingo_install.sql
-RUN sed -i '/# Allow running custom initialization scripts/a POSTGRESQL_INITSCRIPTS_USERNAME=postgres POSTGRESQL_INITSCRIPTS_PASSWORD=\${POSTGRESQL_POSTGRES_PASSWORD:-\$POSTGRESQL_PASSWORD} POSTGRESQL_INITSCRIPTS_DIR=\/opt\/bingo-postgres\/init-scripts postgresql_custom_init_scripts; rm "\$POSTGRESQL_VOLUME_DIR/.user_scripts_initialized"' /opt/bitnami/scripts/postgresql/setup.sh
-USER 1001
+RUN sed -i '/docker_process_init_files \/docker-entrypoint-initdb.d\/*/i docker_process_init_files \/opt\/bingo-postgres\/init-scripts\/*' /usr/local/bin/docker-entrypoint.sh
