@@ -4,7 +4,7 @@ FROM debian:bullseye-slim as builder
 RUN apt-get update \
   && apt-get install -y --no-install-recommends wget unzip
 
-RUN wget --no-check-certificate https://lifescience.opensource.epam.com/downloads/bingo-1.28.0/bingo-postgres-15-linux-x86_64.zip
+RUN wget --no-check-certificate https://lifescience.opensource.epam.com/downloads/bingo-1.29.0/bingo-postgres-15-linux-x86_64.zip
 RUN mkdir -p /opt/bingo-postgres
 RUN unzip -p bingo-postgres-15-linux-x86_64.zip | tar -xzf- -C /opt/bingo-postgres --strip-components=1
 WORKDIR /opt/bingo-postgres
