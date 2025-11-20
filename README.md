@@ -36,7 +36,7 @@ $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d quay.
 
 ## Initialization Scripts
 
-This image supports initialization scripts located in the `/docker-entrypoint-initdb.d/` directory like normal postgres images. The bing specific init scripts are integrated in the image and located in `/opt/bingo-postgres/init-scripts/`. The ENTRYPOINT script is modified to automatically execute this script.
+This image supports initialization scripts located in the `/docker-entrypoint-initdb.d/` directory like normal postgres images. The bingo specific init scripts are integrated in the image and located in `/opt/bingo-postgres/init-scripts/`. The ENTRYPOINT script is modified to automatically execute this script.
 
 ## Init Container
 
