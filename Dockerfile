@@ -1,4 +1,8 @@
-FROM postgres:17-alpine AS builder
+FROM postgres:17 AS builder
+
+# install tools (wget, unzip)
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends wget unzip
 
 RUN wget --no-check-certificate  https://lifescience.opensource.epam.com/downloads/bingo-1.36.0/bingo-postgres-17-linux-x86_64.zip
 RUN mkdir -p /opt/bingo-postgres
@@ -7,7 +11,7 @@ WORKDIR /opt/bingo-postgres
 RUN /bin/sh bingo-pg-install.sh -libdir /opt/bingo-postgres/lib -y
 
 
-FROM postgres:17-alpine AS base
+FROM postgres:17 AS base
 USER root
 COPY --from=builder /opt/bingo-postgres/lib /opt/bingo-postgres/lib
 COPY --from=builder /opt/bingo-postgres/bingo_install.sql /opt/bingo-postgres/init-scripts/000-bingo_install.sql
