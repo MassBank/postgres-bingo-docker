@@ -12,6 +12,16 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - name: postgres-bingo
+            image: quay.io/massbank/postgres-bingo
+            dockerfile: Dockerfile
+          - name: postgres-bingo-init
+            image: quay.io/massbank/postgres-bingo-init
+            dockerfile: Dockerfile.initContainer
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -30,9 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: |
-            quay.io/massbank/postgres-bingo
-            quay.io/massbank/postgres-bingo-init
+          images: ${{ matrix.image }}
           tags: |
             # tag event
             type=ref,event=tag
@@ -43,16 +51,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push postgres-bingo-init image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: Dockerfile.initContainer
+          file: ${{ matrix.dockerfile }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
